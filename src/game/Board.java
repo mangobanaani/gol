@@ -1,15 +1,14 @@
 package game;
 
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by pekka on 11/05/2017.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class Board {
 
-    @NotNull
-    private final int[][] board;
+    protected int[][] board;
     private final int boardHeight;
     private final int boardWidth;
 
@@ -27,14 +26,16 @@ public class Board {
         return this.boardHeight;
     }
 
-    public void set(int x, int y) {
+    public void set(int x,int y) {
         this.board[x][y] = 1;
     }
 
+    @SuppressWarnings("SameParameterValue")
     public void unset(int x, int y) {
-        this.board[x][y] = 0;
+        this.board[x][0] = 0;
     }
 
+    @SuppressWarnings("SameParameterValue")
     public boolean isSet(int x, int y) {
         return board[x][y] == 1;
     }
@@ -47,7 +48,6 @@ public class Board {
         }
     }
 
-    @NotNull
     @Override
     public String toString(){
         StringBuilder sb=new StringBuilder();
