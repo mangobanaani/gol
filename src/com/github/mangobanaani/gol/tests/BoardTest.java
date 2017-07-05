@@ -1,12 +1,12 @@
-package tests;
+package com.github.mangobanaani.gol.tests;
 
-import game.Board;
+import com.github.mangobanaani.gol.game.Board;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Created by pekka on 11/05/2017.
+ * Created by mangobanaani on 11/05/2017.
  */
 
 class BoardTest {

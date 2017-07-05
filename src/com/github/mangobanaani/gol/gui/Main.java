@@ -1,6 +1,6 @@
-package gui;
+package com.github.mangobanaani.gol.gui;
 
-import game.GameBoard;
+import com.github.mangobanaani.gol.game.GameBoard;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -10,13 +10,28 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ Copyright (c) by mangobanaani 2017.
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
 
-        final int leveys = 800;
-        final int korkeus = 800;
+        final int width = 800;
+        final int height = 800;
 
         stage.setTitle("Game of Life");
 
@@ -24,38 +39,34 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-        Canvas piirtoalusta = new Canvas(leveys, korkeus);
-        root.getChildren().add(piirtoalusta);
+        Canvas canvas = new Canvas(width, height);
+        root.getChildren().add(canvas);
 
-        GraphicsContext gc = piirtoalusta.getGraphicsContext2D();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
         GameBoard board = new GameBoard(200, 200);
         board.initRandomly();
 
         new AnimationTimer() {
-            // päivitetään animaatiota noin 200 millisekunnin välein
-            private final long sleepNanoseconds = 200 * 1000000;
+            private static final long sleepNanoseconds = 500000000L;
             private long prevTime = 0;
 
             public void handle(long currentNanoTime) {
-                // päivitetään animaatiota noin 200 millisekunnin välein
                 if ((currentNanoTime - prevTime) < sleepNanoseconds) {
                     return;
                 }
 
-                // piirretään alusta
                 gc.setFill(Color.WHITE);
-                gc.clearRect(0, 0, leveys, korkeus);
+                gc.clearRect(0, 0, width, height);  // clear screen
 
-                // piirretään peli
                 gc.setFill(Color.BLACK);
-                int[][] taulukko = board.getBoard();
+                int[][] boardcopy = board.getBoard(); //  draw board with 4*4 blocks
                 int x = 0;
-                while (x < taulukko.length) {
+                while (x < boardcopy.length) {
                     int y = 0;
-                    while (y < taulukko[x].length) {
-                        int arvo = taulukko[x][y];
-                        if (arvo == 1) {
+                    while (y < boardcopy[x].length) {
+                        int value = boardcopy[x][y];
+                        if (value == 1) {
                             gc.fillRect(x * 4, y * 4, 4, 4);
                         }
                         y++;
@@ -63,10 +74,7 @@ public class Main extends Application {
                     x++;
                 }
 
-                // kutsutaan game of lifelle kehity-metodia
                 board.evolve();
-
-                // älä muuta tätä
                 prevTime = currentNanoTime;
             }
         }.start();

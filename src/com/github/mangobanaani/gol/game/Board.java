@@ -1,8 +1,8 @@
-package game;
+package com.github.mangobanaani.gol.game;
 
 
 /**
- * Created by pekka on 11/05/2017.
+ * Created by mangobanaani on 11/05/2017.
  */
 
 @SuppressWarnings("WeakerAccess")
@@ -26,13 +26,14 @@ public class Board {
         return this.boardHeight;
     }
 
-    public void set(int x,int y) {
+    @SuppressWarnings("SameParameterValue")
+    public void set(int x, int y) {
         this.board[x][y] = 1;
     }
 
     @SuppressWarnings("SameParameterValue")
     public void unset(int x, int y) {
-        this.board[x][0] = 0;
+        this.board[x][y] = 0;
     }
 
     @SuppressWarnings("SameParameterValue")

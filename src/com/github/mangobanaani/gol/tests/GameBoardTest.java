@@ -1,11 +1,9 @@
-package tests;
+package com.github.mangobanaani.gol.tests;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Created by pekka on 18/05/2017.
+ * Created by mangobanaani on 18/05/2017.
  */
 class GameBoardTest {
     @Test

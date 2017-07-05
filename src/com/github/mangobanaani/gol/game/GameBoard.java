@@ -1,11 +1,11 @@
-package game;
+package com.github.mangobanaani.gol.game;
 
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by pekka on 11/05/2017.
+ * Created by mangobanaani on 11/05/2017.
  */
 
 public class GameBoard extends Board{
@@ -20,13 +20,9 @@ public class GameBoard extends Board{
 
         int x = 0;
         while (x < board.length) {
-
             int y = 0;
             while (y < board[x].length) {
-                if (rnd.nextDouble() < 0.2) {
-                    board[x][y] = 1;
-                }
-
+                if (rnd.nextDouble() < 0.2) board[x][y] = 1;
                 y++;
             }
             x++;
@@ -58,7 +54,8 @@ public class GameBoard extends Board{
 
     private int livingNeighbours(int[][] t, int x, int y) {
         int count = 0;
-        int[][] surrounding = {{x - 1, y - 1},
+        int[][] surrounding = {
+                {x - 1, y - 1},
                 {x - 1, y    },
                 {x - 1, y + 1},
                 {x    , y - 1},
